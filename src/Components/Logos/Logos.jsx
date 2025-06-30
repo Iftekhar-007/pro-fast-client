@@ -12,7 +12,7 @@ const showLogos = [logo1, logo2, logo3, logo4, logo5, logo6, logo7];
 
 const Logos = () => {
   return (
-    <div className="lg:w-11/12 mx-auto text-center mb-12">
+    <div className="lg:w-10/12 mx-auto text-center mb-12">
       <div className="mb-10">
         <h2 className="text-4xl font-bold">Our Happy Clients</h2>
       </div>
