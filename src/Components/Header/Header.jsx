@@ -1,5 +1,6 @@
 import React from "react";
 import Logo from "../Logo/Logo";
+import { NavLink } from "react-router";
 
 const Header = () => {
   return (
@@ -52,7 +53,7 @@ const Header = () => {
           </a>
         </div>
         <div className="navbar-center hidden lg:flex">
-          <ul className="menu menu-horizontal px-1">
+          <ul className="menu menu-horizontal px-1 z-1">
             <li>
               <a>Item 1</a>
             </li>
@@ -75,7 +76,9 @@ const Header = () => {
           </ul>
         </div>
         <div className="navbar-end gap-3">
-          <a className="btn bg-primary">sign In</a>
+          <NavLink to="/login" className="btn bg-primary">
+            sign In
+          </NavLink>
           <a className="btn bg-primary">Sign Up</a>
           <label className="swap swap-rotate">
             {/* this hidden checkbox controls the state */}
