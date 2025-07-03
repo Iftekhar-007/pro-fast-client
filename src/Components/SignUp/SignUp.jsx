@@ -2,22 +2,23 @@ import React from "react";
 import Logo from "../Logo/Logo";
 import { NavLink } from "react-router";
 import { useForm } from "react-hook-form";
+// import Logos from "../Logos/Logos";
 
 const SignUp = () => {
   const {
     register,
     handleSubmit,
-    watch,
+
     formState: { errors },
   } = useForm();
 
   const onSubmit = (data) => {
+    data.preventDefault();
     console.log(data);
   };
   return (
     <div className="w-9/12 mx-auto my-5">
       <Logo></Logo>
-
       <div className="lg:flex lg:items-center lg:justify-center lg:h-screen">
         <div className="hero">
           <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow-2xl">
@@ -61,7 +62,7 @@ const SignUp = () => {
                   <div>
                     <a className="link link-hover">Forgot password?</a>
                   </div>
-                  <button className="btn btn-neutral mt-4">Login</button>
+                  <button className="btn btn-neutral mt-4">Sign Up</button>
                 </fieldset>
               </form>
               <NavLink to="/login">
