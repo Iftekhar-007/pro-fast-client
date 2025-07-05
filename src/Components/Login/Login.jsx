@@ -1,10 +1,12 @@
-import React from "react";
+import React, { use } from "react";
 import Logo from "../Logo/Logo";
 import { NavLink } from "react-router";
 import { useForm } from "react-hook-form";
+import Context from "../Contexts/Context";
 // import { register } from "swiper/element";
 
 const Login = () => {
+  const { user, signInWithEmailAndPass } = use(Context);
   const {
     register,
     handleSubmit,
@@ -13,6 +15,16 @@ const Login = () => {
   } = useForm();
   const onSubmit = (data) => {
     console.log(data);
+    const email = data.email;
+    const password = data.password;
+
+    signInWithEmailAndPass(email, password)
+      .then((res) => {
+        console.log(res.user);
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
   return (
     <div className="w-9/12 mx-auto my-5">

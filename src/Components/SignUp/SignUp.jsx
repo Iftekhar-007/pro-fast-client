@@ -1,10 +1,13 @@
-import React from "react";
+import React, { use } from "react";
 import Logo from "../Logo/Logo";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
+import Context from "../Contexts/Context";
 // import Logos from "../Logos/Logos";
 
 const SignUp = () => {
+  const navigate = useNavigate();
+  const { user, createUserWithEmailPass } = use(Context);
   const {
     register,
     handleSubmit,
@@ -13,8 +16,17 @@ const SignUp = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    data.preventDefault();
-    console.log(data);
+    const email = data.email;
+    const password = data.password;
+
+    createUserWithEmailPass(email, password)
+      .then((res) => {
+        console.log(res.user);
+        navigate("/");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
   return (
     <div className="w-9/12 mx-auto my-5">

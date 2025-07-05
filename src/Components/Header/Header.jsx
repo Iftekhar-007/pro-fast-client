@@ -1,8 +1,24 @@
-import React from "react";
+import React, { use } from "react";
 import Logo from "../Logo/Logo";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
+import Context from "../Contexts/Context";
 
 const Header = () => {
+  const { user, logOutUser } = use(Context);
+  const navigate = useNavigate();
+
+  const handleLogOut = (e) => {
+    e.preventDefault();
+
+    logOutUser()
+      .then((res) => {
+        navigate("/");
+        console.log("user logged out");
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
   return (
     <header className="lg:w-11/12 mx-auto p-5">
       <div className="navbar bg-white rounded-[6px] px-3 pb-3">
@@ -69,10 +85,16 @@ const Header = () => {
           </ul>
         </div>
         <div className="navbar-end gap-3">
-          <NavLink to="/login" className="btn bg-primary">
-            sign In
-          </NavLink>
-          <a className="btn bg-primary">Sign Up</a>
+          {user ? (
+            <NavLink onClick={handleLogOut} className="btn bg-primary">
+              Log Out
+            </NavLink>
+          ) : (
+            <NavLink to="/login" className="btn bg-primary">
+              sign In
+            </NavLink>
+          )}
+          <a className="btn bg-primary">Be A Rider</a>
           <label className="swap swap-rotate">
             {/* this hidden checkbox controls the state */}
             <input
