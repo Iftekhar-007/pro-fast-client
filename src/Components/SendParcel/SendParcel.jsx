@@ -3,6 +3,7 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import Context from "../Contexts/Context";
 import { use, useMemo, useState } from "react";
+import AxiosSecure from "../Hooks/AxiosSecure";
 // import { warehouses } from "./warehouses-data"; // ⬅️ replace with your actual import
 
 /**
@@ -702,6 +703,7 @@ const warehouses = [
 ];
 const SendParcel = () => {
   const { user } = use(Context); // ✅ auth context (assumes { user: { displayName, email } })
+  const axiosSecure = AxiosSecure();
 
   const [parcelData, setParcelData] = useState({
     // core
@@ -784,22 +786,58 @@ const SendParcel = () => {
     e.preventDefault();
     const deliveryCost = calculateCost();
 
-    toast.info(`Delivery Cost: ৳${deliveryCost}`, {
-      autoClose: false,
-      closeOnClick: true,
-      closeButton: true,
-      position: "top-center",
-      onClick: () => {
-        const finalData = {
-          ...parcelData,
-          deliveryCost,
-          creation_date: new Date().toISOString(),
-        };
-        console.log("Parcel saved to DB:", finalData);
-        toast.success("Parcel Info Saved Successfully!");
-        // TODO: send finalData to backend
-      },
-    });
+    // ⬇️replace the existing toast inside handleSubmit
+    toast.info(
+      ({ closeToast }) => (
+        <div className="space-y-2">
+          <p className="font-semibold">
+            Delivery Cost: <span className="text-primary">৳{deliveryCost}</span>
+          </p>
+
+          {/* action buttons */}
+          <div className="flex gap-2">
+            <button
+              onClick={() => {
+                const finalData = {
+                  ...parcelData,
+                  deliveryCost,
+                  creation_date: new Date().toISOString(),
+                };
+
+                console.log(finalData);
+
+                axiosSecure
+                  .post("/parcels", finalData)
+                  .then((res) => {
+                    if (res.data.insertedId) {
+                      toast.success(
+                        `${parcelData.title} is added to ${user.email}'s parcel list`
+                      );
+                    }
+                  })
+
+                  .catch((err) => console.log(err.message))
+                  .finally(closeToast); // close after req finishes
+              }}
+              className="btn btn-sm btn-primary"
+            >
+              ✅ Confirm
+            </button>
+
+            <button onClick={closeToast} className="btn btn-sm btn-ghost">
+              ❌ Cancel
+            </button>
+          </div>
+        </div>
+      ),
+      {
+        position: "top-center",
+        autoClose: false, // keep it open
+        closeOnClick: false,
+        closeButton: false, // we have our own buttons
+        draggable: false,
+      }
+    );
   };
 
   return (
@@ -859,6 +897,7 @@ const SendParcel = () => {
               name="senderName"
               type="text"
               value={user.displayName}
+              placeholder="Your Name"
               className="input input-bordered bg-gray-100"
             />
 

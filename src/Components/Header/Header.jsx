@@ -64,6 +64,12 @@ const Header = () => {
               <li>
                 <NavLink to="/sendparcel">send parcel</NavLink>
               </li>
+
+              {user && (
+                <>
+                  <NavLink>Dashboard</NavLink>
+                </>
+              )}
             </ul>
           </div>
 
@@ -86,6 +92,11 @@ const Header = () => {
             <li>
               <a>Be A Rider</a>
             </li>
+            {user && (
+              <li>
+                <NavLink to="/dashboard">Dashboard</NavLink>
+              </li>
+            )}
             <li>
               <NavLink to="/sendparcel">send parcel</NavLink>
             </li>
