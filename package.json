@@ -21,8 +21,10 @@
     "react-leaflet": "^5.0.0",
     "react-responsive-carousel": "^3.2.23",
     "react-router": "^7.6.3",
+    "react-toastify": "^11.0.5",
     "swiper": "^11.2.10",
-    "tailwindcss": "^4.1.11"
+    "tailwindcss": "^4.1.11",
+    "toastify": "^2.0.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.29.0",

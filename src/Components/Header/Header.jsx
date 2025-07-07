@@ -60,6 +60,10 @@ const Header = () => {
               <li>
                 <a>Be A Rider</a>
               </li>
+
+              <li>
+                <NavLink to="/sendparcel">send parcel</NavLink>
+              </li>
             </ul>
           </div>
 
@@ -81,6 +85,9 @@ const Header = () => {
             </li>
             <li>
               <a>Be A Rider</a>
+            </li>
+            <li>
+              <NavLink to="/sendparcel">send parcel</NavLink>
             </li>
           </ul>
         </div>
