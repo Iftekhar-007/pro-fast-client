@@ -1,12 +1,13 @@
 import React, { use } from "react";
 import Logo from "../Logo/Logo";
-import { NavLink } from "react-router";
+import { NavLink, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import Context from "../Contexts/Context";
 // import { register } from "swiper/element";
 
 const Login = () => {
   const { user, signInWithEmailAndPass } = use(Context);
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -21,6 +22,7 @@ const Login = () => {
     signInWithEmailAndPass(email, password)
       .then((res) => {
         console.log(res.user);
+        navigate("/");
       })
       .catch((error) => {
         console.log(error.message);

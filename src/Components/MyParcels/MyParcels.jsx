@@ -7,7 +7,11 @@ const MyParcels = () => {
   const { user } = use(Context);
   const axiosSecure = AxiosSecure();
 
-  const { data: parcels = [] } = useQuery({
+  const {
+    data: parcels = [],
+    refetch,
+    isPending,
+  } = useQuery({
     queryKey: ["my-parcels", user?.email],
     queryFn: async () => {
       const res = await axiosSecure.get(`my-parcels?email=${user?.email}`);
@@ -17,8 +21,15 @@ const MyParcels = () => {
 
   console.log(parcels);
 
+  if (isPending) {
+    <>
+      <h4>Loding.......</h4>
+    </>;
+  }
+
   const handleDelete = (id) => {
     // TODO: Add confirmation and delete request
+    refetch();
     console.log("Deleting parcel with ID:", id);
   };
 
@@ -41,7 +52,6 @@ const MyParcels = () => {
               <th className="border p-2">Title</th>
               <th className="border p-2">Type</th>
               <th className="border p-2">Receiver</th>
-
               <th className="border p-2">Delivery Status</th>
               <th className="border p-2">Payment</th>
               <th className="border p-2">Cost</th>
