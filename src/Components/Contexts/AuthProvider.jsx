@@ -7,6 +7,7 @@ import {
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
+  updateProfile,
 } from "firebase/auth";
 import { auth } from "../../Firebase/firebase.config";
 // import { signInWithEmailAndPassword } from "firebase/auth/cordova";
@@ -37,6 +38,10 @@ const AuthProvider = ({ children }) => {
     return signOut(auth);
   };
 
+  const updateUserProfile = (profileInfo) => {
+    return updateProfile(auth.currentUser, profileInfo);
+  };
+
   useEffect(() => {
     const unSubscribe = onAuthStateChanged(auth, (currentUser) => {
       console.log("get user by effect", currentUser);
@@ -55,6 +60,7 @@ const AuthProvider = ({ children }) => {
     setUser,
     loading,
     signInWithEmailAndPass,
+    updateUserProfile,
   };
   return <Context value={userinfo}>{children}</Context>;
 };

@@ -1,13 +1,17 @@
-import React, { use } from "react";
+import React, { use, useState } from "react";
 import Logo from "../Logo/Logo";
 import { NavLink, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import Context from "../Contexts/Context";
+import axios from "axios";
+import UseAxios from "../Hooks/UseAxios";
 // import Logos from "../Logos/Logos";
 
 const SignUp = () => {
   const navigate = useNavigate();
-  const { user, createUserWithEmailPass } = use(Context);
+  const axiosInstance = UseAxios();
+  const [profilePic, setProfilePic] = useState("");
+  const { user, createUserWithEmailPass, updateUserProfile } = use(Context);
   const {
     register,
     handleSubmit,
@@ -20,13 +24,55 @@ const SignUp = () => {
     const password = data.password;
 
     createUserWithEmailPass(email, password)
-      .then((res) => {
+      .then(async (res) => {
         console.log(res.user);
+
+        // update in db
+
+        const userInfo = {
+          email: data.email,
+          role: "user", // default
+          cratedAt: new Date().toISOString(),
+        };
+
+        const userRes = await axiosInstance.post("/users", userInfo);
+        console.log(userRes.data);
+
+        // update in firebase
+
+        const userProfile = {
+          displayName: data.name,
+          photoURL: profilePic,
+        };
+
+        updateUserProfile(userProfile)
+          .then(() => {
+            console.log("updated profile name and picture");
+          })
+          .catch((err) => {
+            console.log(err);
+          });
         navigate("/");
       })
       .catch((error) => {
         console.log(error.message);
       });
+  };
+
+  const handleImgUpload = async (e) => {
+    const image = e.target.files[0];
+    console.log(image);
+
+    const formData = new FormData();
+    formData.append("image", image);
+
+    const imgUploadURL = `https://api.imgbb.com/1/upload?key=${
+      import.meta.env.VITE_img_key
+    }`;
+
+    const res = await axios.post(imgUploadURL, formData);
+
+    setProfilePic(res.data.data.url);
   };
   return (
     <div className="w-9/12 mx-auto my-5">
@@ -38,6 +84,7 @@ const SignUp = () => {
               <h1 className="text-5xl font-bold">Sign Up!</h1>
               <form onSubmit={handleSubmit(onSubmit)}>
                 <fieldset className="fieldset">
+                  {/* name */}
                   <label className="label">Name</label>
                   <input
                     {...register("name", { required: true })}
@@ -48,6 +95,17 @@ const SignUp = () => {
                   {errors.name?.type === "required" && (
                     <p className="text-red-500">Name is required</p>
                   )}
+
+                  {/* photo */}
+                  <label className="label">Profile Photo</label>
+                  <input
+                    onChange={handleImgUpload}
+                    type="file"
+                    className="input"
+                    placeholder="Your Profile Picture"
+                  />
+
+                  {/* email */}
                   <label className="label">Email</label>
                   <input
                     {...register("email", { required: true })}
@@ -58,6 +116,8 @@ const SignUp = () => {
                   {errors.email?.type === "required" && (
                     <p className="text-red-500">email is required</p>
                   )}
+
+                  {/* password */}
                   <label className="label">Password</label>
                   <input
                     {...register("password", { required: true, minLength: 6 })}
