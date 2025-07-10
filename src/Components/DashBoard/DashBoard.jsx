@@ -2,6 +2,7 @@ import React from "react";
 import Logo from "../Logo/Logo";
 import DashNav from "./DashNav";
 import { NavLink, Outlet } from "react-router";
+import { ToastContainer } from "react-toastify";
 
 const DashBoard = () => {
   return (
@@ -52,12 +53,16 @@ const DashBoard = () => {
                 <NavLink to="myparcels">My Parcels</NavLink>
               </li>
               <li>
-                <a>Sidebar Item 2</a>
+                <NavLink to="/dashboard/pendingriders">Pending Riders</NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/activeriders">Active Riders</NavLink>
               </li>
             </ul>
           </div>
         </div>
       </div>
+      <ToastContainer></ToastContainer>
     </div>
   );
 };

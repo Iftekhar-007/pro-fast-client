@@ -57,9 +57,6 @@ const Header = () => {
               <li>
                 <a>Pricing</a>
               </li>
-              <li>
-                <a>Be A Rider</a>
-              </li>
 
               <li>
                 <NavLink to="/sendparcel">send parcel</NavLink>
@@ -89,9 +86,7 @@ const Header = () => {
             <li>
               <a>Pricing</a>
             </li>
-            <li>
-              <a>Be A Rider</a>
-            </li>
+
             {user && (
               <li>
                 <NavLink to="/dashboard">Dashboard</NavLink>
@@ -104,15 +99,23 @@ const Header = () => {
         </div>
         <div className="navbar-end gap-3">
           {user ? (
-            <NavLink onClick={handleLogOut} className="btn bg-primary">
-              Log Out
-            </NavLink>
+            <>
+              <NavLink onClick={handleLogOut} className="btn bg-primary">
+                Log Out
+              </NavLink>
+
+              <NavLink to="/bearider" className="btn bg-primary">
+                Be A Rider
+              </NavLink>
+            </>
           ) : (
             <NavLink to="/login" className="btn bg-primary">
               sign In
             </NavLink>
           )}
-          <a className="btn bg-primary">Be A Rider</a>
+          {/* <NavLink to="/bearider" className="btn bg-primary">
+            Be A Rider
+          </NavLink> */}
           <label className="swap swap-rotate">
             {/* this hidden checkbox controls the state */}
             <input

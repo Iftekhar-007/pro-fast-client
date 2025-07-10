@@ -3,15 +3,16 @@ import Logo from "../Logo/Logo";
 import { NavLink, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import Context from "../Contexts/Context";
+import SocialLogin from "../GoogleButton/SocialLogin";
 // import { register } from "swiper/element";
 
 const Login = () => {
-  const { user, signInWithEmailAndPass } = use(Context);
+  const { signInWithEmailAndPass } = use(Context);
   const navigate = useNavigate();
   const {
     register,
     handleSubmit,
-    watch,
+
     formState: { errors },
   } = useForm();
   const onSubmit = (data) => {
@@ -78,6 +79,8 @@ const Login = () => {
               Don't have any account yet ?{" "}
               <span className="text-red-500">Sign Up!</span>
             </NavLink>
+
+            <SocialLogin></SocialLogin>
           </div>
         </div>
       </div>

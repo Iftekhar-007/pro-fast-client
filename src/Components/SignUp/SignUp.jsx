@@ -5,13 +5,14 @@ import { useForm } from "react-hook-form";
 import Context from "../Contexts/Context";
 import axios from "axios";
 import UseAxios from "../Hooks/UseAxios";
+import SocialLogin from "../GoogleButton/SocialLogin";
 // import Logos from "../Logos/Logos";
 
 const SignUp = () => {
   const navigate = useNavigate();
   const axiosInstance = UseAxios();
   const [profilePic, setProfilePic] = useState("");
-  const { user, createUserWithEmailPass, updateUserProfile } = use(Context);
+  const { createUserWithEmailPass, updateUserProfile } = use(Context);
   const {
     register,
     handleSubmit,
@@ -140,6 +141,8 @@ const SignUp = () => {
               <NavLink to="/login">
                 Have An Account ? <span className="text-red-500">Log In</span>
               </NavLink>
+
+              <SocialLogin></SocialLogin>
             </div>
           </div>
         </div>

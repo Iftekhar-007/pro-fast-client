@@ -9,6 +9,9 @@ import SendParcel from "../Components/SendParcel/SendParcel";
 import PrivateRoutes from "./PrivateRoutes";
 import DashBoard from "../Components/DashBoard/DashBoard";
 import MyParcels from "../Components/MyParcels/MyParcels";
+import BeARider from "../Components/Rider/BeARider";
+import PendingRiders from "../Components/Rider/PendingRiders";
+import ActiveRiders from "../Components/Rider/ActiveRiders";
 
 export const router = createBrowserRouter([
   {
@@ -29,6 +32,14 @@ export const router = createBrowserRouter([
         element: (
           <PrivateRoutes>
             <SendParcel></SendParcel>
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "/bearider",
+        element: (
+          <PrivateRoutes>
+            <BeARider></BeARider>
           </PrivateRoutes>
         ),
       },
@@ -55,6 +66,22 @@ export const router = createBrowserRouter([
       {
         path: "myparcels",
         Component: MyParcels,
+      },
+      {
+        path: "pendingriders",
+        element: (
+          <PrivateRoutes>
+            <PendingRiders></PendingRiders>
+          </PrivateRoutes>
+        ),
+      },
+      {
+        path: "activeriders",
+        element: (
+          <PrivateRoutes>
+            <ActiveRiders></ActiveRiders>
+          </PrivateRoutes>
+        ),
       },
     ],
   },
