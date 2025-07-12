@@ -37,6 +37,7 @@ export const router = createBrowserRouter([
           </PrivateRoutes>
         ),
       },
+
       {
         path: "/bearider",
         element: (
