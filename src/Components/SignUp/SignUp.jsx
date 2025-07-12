@@ -31,6 +31,7 @@ const SignUp = () => {
         // update in db
 
         const userInfo = {
+          name: data.name,
           email: data.email,
           role: "user", // default
           cratedAt: new Date().toISOString(),

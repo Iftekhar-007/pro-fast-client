@@ -1,10 +1,19 @@
-import React from "react";
+import React, { use } from "react";
 import Logo from "../Logo/Logo";
 import DashNav from "./DashNav";
 import { NavLink, Outlet } from "react-router";
 import { ToastContainer } from "react-toastify";
+import AdminLink from "../../Routes/AdminLink";
+import useUserRole from "../Hooks/UseUserRole";
+import Context from "../Contexts/Context";
+
+// import useUserRole from "../Hooks/UseUserRole";
 
 const DashBoard = () => {
+  const { user } = use(Context);
+  console.log(user);
+  const data = useUserRole();
+  console.log(data);
   return (
     <div>
       <div className="lg:w-9/12 mx-auto my-10">
@@ -52,12 +61,22 @@ const DashBoard = () => {
               <li>
                 <NavLink to="myparcels">My Parcels</NavLink>
               </li>
-              <li>
-                <NavLink to="/dashboard/pendingriders">Pending Riders</NavLink>
-              </li>
-              <li>
-                <NavLink to="/dashboard/activeriders">Active Riders</NavLink>
-              </li>
+              <AdminLink>
+                <li>
+                  <NavLink to="/dashboard/pendingriders">
+                    Pending Riders
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/activeriders">Active Riders</NavLink>
+                </li>
+
+                <li>
+                  <NavLink to="/dashboard/admin-manager">
+                    👑 Admin Manager
+                  </NavLink>
+                </li>
+              </AdminLink>
             </ul>
           </div>
         </div>

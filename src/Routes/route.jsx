@@ -12,6 +12,8 @@ import MyParcels from "../Components/MyParcels/MyParcels";
 import BeARider from "../Components/Rider/BeARider";
 import PendingRiders from "../Components/Rider/PendingRiders";
 import ActiveRiders from "../Components/Rider/ActiveRiders";
+import AdminManager from "../Components/Admin/AdminManager";
+import AdminRoute from "./AdminRoute";
 
 export const router = createBrowserRouter([
   {
@@ -70,17 +72,25 @@ export const router = createBrowserRouter([
       {
         path: "pendingriders",
         element: (
-          <PrivateRoutes>
+          <AdminRoute>
             <PendingRiders></PendingRiders>
-          </PrivateRoutes>
+          </AdminRoute>
         ),
       },
       {
         path: "activeriders",
         element: (
-          <PrivateRoutes>
+          <AdminRoute>
             <ActiveRiders></ActiveRiders>
-          </PrivateRoutes>
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "admin-manager",
+        element: (
+          <AdminRoute>
+            <AdminManager />
+          </AdminRoute>
         ),
       },
     ],

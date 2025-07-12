@@ -4,7 +4,7 @@ import AxiosSecure from "../Hooks/AxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 
 const MyParcels = () => {
-  const { user } = use(Context);
+  const { user, loading } = use(Context);
   const axiosSecure = AxiosSecure();
 
   const {
@@ -14,7 +14,7 @@ const MyParcels = () => {
   } = useQuery({
     queryKey: ["my-parcels", user?.email],
     queryFn: async () => {
-      const res = await axiosSecure.get(`my-parcels?email=${user?.email}`);
+      const res = await axiosSecure.get(`/my-parcels?email=${user?.email}`);
       return res.data;
     },
   });
@@ -22,9 +22,9 @@ const MyParcels = () => {
   console.log(parcels);
 
   if (isPending) {
-    <>
-      <h4>Loding.......</h4>
-    </>;
+    {
+      loading;
+    }
   }
 
   const handleDelete = (id) => {

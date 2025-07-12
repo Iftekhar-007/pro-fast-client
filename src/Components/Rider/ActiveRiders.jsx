@@ -32,6 +32,7 @@ const ActiveRiders = () => {
           <tr>
             <th>#</th>
             <th>Name</th>
+            <th>email</th>
             <th>Phone</th>
             <th>District</th>
             <th>Bike</th>
@@ -42,6 +43,7 @@ const ActiveRiders = () => {
             <tr key={rider._id}>
               <td>{i + 1}</td>
               <td>{rider.name}</td>
+              <td>{rider.email}</td>
               <td>{rider.phone}</td>
               <td>{rider.district}</td>
               <td>{rider.bikeName}</td>

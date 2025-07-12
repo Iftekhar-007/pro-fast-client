@@ -19,7 +19,10 @@ const PendingRiders = () => {
 
   // ✅ Approve rider
   const approveMutation = useMutation({
-    mutationFn: (id) => axiosSecure.patch(`/riders/approve/${id}`),
+    mutationFn: (rider) =>
+      axiosSecure.patch(`/riders/approve/${rider._id}`, {
+        email: rider.email,
+      }),
     onSuccess: () => {
       toast.success("Rider approved");
       queryClient.invalidateQueries(["pendingRiders"]);
@@ -29,7 +32,7 @@ const PendingRiders = () => {
 
   // ✅ Cancel rider
   const cancelMutation = useMutation({
-    mutationFn: (id) => axiosSecure.delete(`/riders/cancel/${id}`),
+    mutationFn: (rider) => axiosSecure.delete(`/riders/cancel/${rider._id}`),
     onSuccess: () => {
       toast.success("Application cancelled");
       queryClient.invalidateQueries(["pendingRiders"]);
@@ -67,7 +70,7 @@ const PendingRiders = () => {
                 <td className="flex gap-2 flex-wrap">
                   <button
                     className="btn btn-sm btn-success"
-                    onClick={() => approveMutation.mutate(rider._id)}
+                    onClick={() => approveMutation.mutate(rider)}
                   >
                     Approve
                   </button>
