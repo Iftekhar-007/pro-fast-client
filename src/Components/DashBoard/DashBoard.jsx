@@ -6,6 +6,7 @@ import { ToastContainer } from "react-toastify";
 import AdminLink from "../../Routes/AdminLink";
 import useUserRole from "../Hooks/UseUserRole";
 import Context from "../Contexts/Context";
+import { FaMotorcycle } from "react-icons/fa";
 
 // import useUserRole from "../Hooks/UseUserRole";
 
@@ -74,6 +75,12 @@ const DashBoard = () => {
                 <li>
                   <NavLink to="/dashboard/admin-manager">
                     👑 Admin Manager
+                  </NavLink>
+                </li>
+
+                <li>
+                  <NavLink to="/dashboard/assign-rider">
+                    <FaMotorcycle></FaMotorcycle> Assign Rider
                   </NavLink>
                 </li>
               </AdminLink>

@@ -14,6 +14,7 @@ import PendingRiders from "../Components/Rider/PendingRiders";
 import ActiveRiders from "../Components/Rider/ActiveRiders";
 import AdminManager from "../Components/Admin/AdminManager";
 import AdminRoute from "./AdminRoute";
+import AssignRider from "../Components/Rider/AssignRider";
 
 export const router = createBrowserRouter([
   {
@@ -64,7 +65,11 @@ export const router = createBrowserRouter([
   },
   {
     path: "/dashboard",
-    Component: DashBoard,
+    element: (
+      <PrivateRoutes>
+        <DashBoard></DashBoard>
+      </PrivateRoutes>
+    ),
     children: [
       {
         path: "myparcels",
@@ -91,6 +96,14 @@ export const router = createBrowserRouter([
         element: (
           <AdminRoute>
             <AdminManager />
+          </AdminRoute>
+        ),
+      },
+      {
+        path: "assign-rider",
+        element: (
+          <AdminRoute>
+            <AssignRider></AssignRider>
           </AdminRoute>
         ),
       },
