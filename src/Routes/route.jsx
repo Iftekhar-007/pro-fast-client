@@ -15,6 +15,9 @@ import ActiveRiders from "../Components/Rider/ActiveRiders";
 import AdminManager from "../Components/Admin/AdminManager";
 import AdminRoute from "./AdminRoute";
 import AssignRider from "../Components/Rider/AssignRider";
+import RiderRoute from "./RiderRoute";
+
+import RiderTasks from "../Components/Rider/RiderTasks";
 
 export const router = createBrowserRouter([
   {
@@ -74,6 +77,14 @@ export const router = createBrowserRouter([
       {
         path: "myparcels",
         Component: MyParcels,
+      },
+      {
+        path: "rider-tasks",
+        element: (
+          <RiderRoute>
+            <RiderTasks></RiderTasks>
+          </RiderRoute>
+        ),
       },
       {
         path: "pendingriders",

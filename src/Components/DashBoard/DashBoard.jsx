@@ -6,7 +6,8 @@ import { ToastContainer } from "react-toastify";
 import AdminLink from "../../Routes/AdminLink";
 import useUserRole from "../Hooks/UseUserRole";
 import Context from "../Contexts/Context";
-import { FaMotorcycle } from "react-icons/fa";
+import { FaMotorcycle, FaParachuteBox, FaTasks } from "react-icons/fa";
+import RiderLink from "../../Routes/RiderLink";
 
 // import useUserRole from "../Hooks/UseUserRole";
 
@@ -60,8 +61,18 @@ const DashBoard = () => {
             <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
               {/* Sidebar content here */}
               <li>
-                <NavLink to="myparcels">My Parcels</NavLink>
+                <NavLink to="myparcels">
+                  <FaParachuteBox></FaParachuteBox>
+                  My Parcels
+                </NavLink>
               </li>
+              <RiderLink>
+                <li>
+                  <NavLink to="/dashboard/rider-tasks">
+                    <FaTasks></FaTasks>Tasks
+                  </NavLink>
+                </li>
+              </RiderLink>
               <AdminLink>
                 <li>
                   <NavLink to="/dashboard/pendingriders">
