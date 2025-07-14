@@ -18,6 +18,7 @@ import AssignRider from "../Components/Rider/AssignRider";
 import RiderRoute from "./RiderRoute";
 
 import RiderTasks from "../Components/Rider/RiderTasks";
+import CompletedDeliveries from "../Components/Rider/CompletedDeliveries";
 
 export const router = createBrowserRouter([
   {
@@ -83,6 +84,14 @@ export const router = createBrowserRouter([
         element: (
           <RiderRoute>
             <RiderTasks></RiderTasks>
+          </RiderRoute>
+        ),
+      },
+      {
+        path: "completed-deliveries",
+        element: (
+          <RiderRoute>
+            <CompletedDeliveries></CompletedDeliveries>
           </RiderRoute>
         ),
       },

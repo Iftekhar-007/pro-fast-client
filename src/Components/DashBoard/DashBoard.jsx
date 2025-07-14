@@ -6,7 +6,15 @@ import { ToastContainer } from "react-toastify";
 import AdminLink from "../../Routes/AdminLink";
 import useUserRole from "../Hooks/UseUserRole";
 import Context from "../Contexts/Context";
-import { FaMotorcycle, FaParachuteBox, FaTasks } from "react-icons/fa";
+import {
+  FaClipboardCheck,
+  FaFirstOrder,
+  FaHome,
+  FaMotorcycle,
+  FaOpenid,
+  FaParachuteBox,
+  FaTasks,
+} from "react-icons/fa";
 import RiderLink from "../../Routes/RiderLink";
 
 // import useUserRole from "../Hooks/UseUserRole";
@@ -61,7 +69,13 @@ const DashBoard = () => {
             <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
               {/* Sidebar content here */}
               <li>
-                <NavLink to="myparcels">
+                <NavLink to="/">
+                  <FaHome></FaHome>
+                  Home
+                </NavLink>
+              </li>
+              <li>
+                <NavLink to="/dashboard/myparcels">
                   <FaParachuteBox></FaParachuteBox>
                   My Parcels
                 </NavLink>
@@ -72,15 +86,29 @@ const DashBoard = () => {
                     <FaTasks></FaTasks>Tasks
                   </NavLink>
                 </li>
+
+                <li>
+                  <NavLink
+                    to="/dashboard/completed-deliveries"
+                    className="flex items-center gap-2"
+                  >
+                    <FaClipboardCheck />
+                    Completed Deliveries
+                  </NavLink>
+                </li>
               </RiderLink>
               <AdminLink>
                 <li>
                   <NavLink to="/dashboard/pendingriders">
+                    <FaOpenid></FaOpenid>
                     Pending Riders
                   </NavLink>
                 </li>
                 <li>
-                  <NavLink to="/dashboard/activeriders">Active Riders</NavLink>
+                  <NavLink to="/dashboard/activeriders">
+                    <FaFirstOrder></FaFirstOrder>
+                    Active Riders
+                  </NavLink>
                 </li>
 
                 <li>
