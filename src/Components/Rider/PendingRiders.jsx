@@ -32,7 +32,7 @@ const PendingRiders = () => {
 
   // ✅ Cancel rider
   const cancelMutation = useMutation({
-    mutationFn: (rider) => axiosSecure.delete(`/riders/cancel/${rider._id}`),
+    mutationFn: (id) => axiosSecure.delete(`/riders/cancel/${id}`),
     onSuccess: () => {
       toast.success("Application cancelled");
       queryClient.invalidateQueries(["pendingRiders"]);

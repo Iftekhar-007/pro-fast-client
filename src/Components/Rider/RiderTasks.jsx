@@ -128,6 +128,7 @@ const RiderTasks = () => {
     },
     onSuccess: () => {
       toast.success("Status updated ✅");
+
       queryClient.invalidateQueries(["riderTasks", user?.email]);
     },
     onError: () => {

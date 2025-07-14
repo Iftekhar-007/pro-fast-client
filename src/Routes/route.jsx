@@ -19,6 +19,7 @@ import RiderRoute from "./RiderRoute";
 
 import RiderTasks from "../Components/Rider/RiderTasks";
 import CompletedDeliveries from "../Components/Rider/CompletedDeliveries";
+import TotalEarnings from "../Components/Rider/TotalEarnings";
 
 export const router = createBrowserRouter([
   {
@@ -92,6 +93,14 @@ export const router = createBrowserRouter([
         element: (
           <RiderRoute>
             <CompletedDeliveries></CompletedDeliveries>
+          </RiderRoute>
+        ),
+      },
+      {
+        path: "total-earnings",
+        element: (
+          <RiderRoute>
+            <TotalEarnings></TotalEarnings>
           </RiderRoute>
         ),
       },

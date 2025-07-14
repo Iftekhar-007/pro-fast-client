@@ -5,6 +5,8 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { FaTruck } from "react-icons/fa";
 import AxiosSecure from "../Hooks/AxiosSecure";
 import { Button, Dialog } from "@headlessui/react";
+import trackParcel from "../Hooks/trackParcel";
+// import trackParcel from "../Hooks/trackParcel";
 
 const AssignRider = () => {
   const axiosSecure = AxiosSecure();
@@ -49,11 +51,23 @@ const AssignRider = () => {
         assignedRiderName: rider.name,
         assignedRiderEmail: rider.email,
       }),
-    onSuccess: () => {
+    onSuccess: async (data, variables) => {
       queryClient.invalidateQueries(["paid-pending-parcels"]);
       setIsOpen(false);
       setSelectedParcel(null);
       setSelectedRider(null);
+
+      try {
+        const parcelTrackingId = data?.trackingId || "";
+        await trackParcel({
+          trackingId: parcelTrackingId,
+          parcelId: variables.parcelId,
+          status: "assigned",
+          message: `Rider assigned: ${variables.rider.name}`,
+        });
+      } catch (error) {
+        console.error("Failed to add tracking log:", error.message);
+      }
     },
   });
 

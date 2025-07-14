@@ -14,6 +14,7 @@ import {
   FaOpenid,
   FaParachuteBox,
   FaTasks,
+  FaWallet,
 } from "react-icons/fa";
 import RiderLink from "../../Routes/RiderLink";
 
@@ -94,6 +95,12 @@ const DashBoard = () => {
                   >
                     <FaClipboardCheck />
                     Completed Deliveries
+                  </NavLink>
+                </li>
+                <li>
+                  <NavLink to="/dashboard/total-earnings">
+                    <FaWallet></FaWallet>
+                    Total earnings
                   </NavLink>
                 </li>
               </RiderLink>
