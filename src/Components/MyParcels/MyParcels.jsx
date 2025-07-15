@@ -2,6 +2,7 @@ import React, { use } from "react";
 import Context from "../Contexts/Context";
 import AxiosSecure from "../Hooks/AxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import { NavLink } from "react-router";
 
 const MyParcels = () => {
   const { user, loading } = use(Context);
@@ -33,14 +34,14 @@ const MyParcels = () => {
     console.log("Deleting parcel with ID:", id);
   };
 
-  const handlePay = (parcel) => {
+  const handlePay = (id) => {
     // TODO: Integrate payment logic
-    console.log("Paying for parcel:", parcel);
+    console.log("Paying for parcel:", id);
   };
 
-  const handleViewDetails = (parcel) => {
+  const handleViewDetails = (id) => {
     // TODO: Open modal or navigate to detail page
-    console.log("Viewing parcel:", parcel);
+    console.log("Viewing parcel:", id);
   };
   return (
     <div className="p-4">
@@ -98,12 +99,13 @@ const MyParcels = () => {
                     Delete
                   </button>
                   {parcel.paymentStatus === "unpaid" && (
-                    <button
-                      onClick={() => handlePay(parcel)}
+                    <NavLink
+                      to={`/dashboard/payment/${parcel._id}`}
+                      onClick={() => handlePay(parcel._id)}
                       className="bg-green-600 text-white px-2 py-1 rounded hover:bg-green-700 text-xs"
                     >
                       Pay
-                    </button>
+                    </NavLink>
                   )}
                 </td>
               </tr>
