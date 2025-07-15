@@ -6,6 +6,8 @@ import { ToastContainer } from "react-toastify";
 import AdminLink from "../../Routes/AdminLink";
 import useUserRole from "../Hooks/UseUserRole";
 import Context from "../Contexts/Context";
+import { HiOutlineCreditCard } from "react-icons/hi";
+
 import {
   FaClipboardCheck,
   FaFirstOrder,
@@ -70,7 +72,7 @@ const DashBoard = () => {
             <ul className="menu bg-base-200 text-base-content min-h-full w-80 p-4">
               {/* Sidebar content here */}
               <li>
-                <NavLink to="/">
+                <NavLink to="/dashboard">
                   <FaHome></FaHome>
                   Home
                 </NavLink>
@@ -79,6 +81,13 @@ const DashBoard = () => {
                 <NavLink to="/dashboard/myparcels">
                   <FaParachuteBox></FaParachuteBox>
                   My Parcels
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink to="/dashboard/paymenthistory">
+                  <HiOutlineCreditCard />
+                  Payment History
                 </NavLink>
               </li>
               <RiderLink>

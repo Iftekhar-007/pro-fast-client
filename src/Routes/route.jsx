@@ -21,6 +21,7 @@ import RiderTasks from "../Components/Rider/RiderTasks";
 import CompletedDeliveries from "../Components/Rider/CompletedDeliveries";
 import TotalEarnings from "../Components/Rider/TotalEarnings";
 import Payment from "../Components/Pages/Payment";
+import PaymentHistory from "../Components/Pages/PaymentHistory";
 
 export const router = createBrowserRouter([
   {
@@ -84,6 +85,10 @@ export const router = createBrowserRouter([
       {
         path: "payment/:parcelId",
         Component: Payment,
+      },
+      {
+        path: "paymenthistory",
+        Component: PaymentHistory,
       },
       {
         path: "rider-tasks",
