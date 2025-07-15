@@ -1,6 +1,6 @@
 import React, { use } from "react";
 import Logo from "../Logo/Logo";
-import { NavLink, useNavigate } from "react-router";
+import { NavLink, useLocation, useNavigate } from "react-router";
 import { useForm } from "react-hook-form";
 import Context from "../Contexts/Context";
 import SocialLogin from "../GoogleButton/SocialLogin";
@@ -8,7 +8,10 @@ import SocialLogin from "../GoogleButton/SocialLogin";
 
 const Login = () => {
   const { signInWithEmailAndPass } = use(Context);
+  const location = useLocation();
+
   const navigate = useNavigate();
+  const from = location?.state?.from || "/";
   const {
     register,
     handleSubmit,
@@ -23,7 +26,7 @@ const Login = () => {
     signInWithEmailAndPass(email, password)
       .then((res) => {
         console.log(res.user);
-        navigate("/");
+        navigate(from);
       })
       .catch((error) => {
         console.log(error.message);

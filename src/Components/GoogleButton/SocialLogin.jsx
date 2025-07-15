@@ -1,17 +1,20 @@
 import React, { use } from "react";
 import Context from "../Contexts/Context";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import UseAxios from "../Hooks/UseAxios";
 
 const SocialLogin = () => {
   const { signInWithGoogle, updateUserProfile, user } = use(Context);
+  const location = useLocation();
   const navigate = useNavigate();
+  const from = location?.state?.from || "/";
   const axiosInstance = UseAxios();
 
   const handleGoogleSignIn = () => {
     signInWithGoogle()
       .then(async (res) => {
         console.log(res.user);
+        navigate(from);
 
         const userInfo = {
           email: res.user.email,
@@ -36,7 +39,6 @@ const SocialLogin = () => {
           .catch((err) => {
             console.log(err);
           });
-        navigate("/");
       })
       .catch((error) => {
         console.log(error.message);

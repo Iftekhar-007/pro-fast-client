@@ -100,6 +100,12 @@ const Header = () => {
         <div className="navbar-end gap-3">
           {user ? (
             <>
+              <img
+                title={user.displayName}
+                src={user.photoURL}
+                className="w-16 rounded-full"
+                alt="avatar"
+              />
               <NavLink onClick={handleLogOut} className="btn bg-primary">
                 Log Out
               </NavLink>

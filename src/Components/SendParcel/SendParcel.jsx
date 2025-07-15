@@ -4,7 +4,8 @@ import "react-toastify/dist/ReactToastify.css";
 import Context from "../Contexts/Context";
 import { use, useMemo, useState } from "react";
 import AxiosSecure from "../Hooks/AxiosSecure";
-import TrackParcel from "../Hooks/trackParcel";
+
+import trackParcel from "../Hooks/trackParcel";
 // import TrackParcel from "../Hooks/trackParcel";
 // import trackParcel from "../Hooks/trackParcel";
 // import { warehouses } from "./warehouses-data"; // ⬅️ replace with your actual import
@@ -710,7 +711,7 @@ const SendParcel = () => {
   // const { trackParcel } = trackParcel();
   // const { trackParcel } = TrackParcel();
 
-  const { trackParcel } = TrackParcel();
+  // const { trackParcel } = TrackParcel();
   const [parcelData, setParcelData] = useState({
     // core
     type: "document",
@@ -804,8 +805,10 @@ const SendParcel = () => {
           <div className="flex gap-2">
             <button
               onClick={() => {
+                const freshTrackingId = generateTrackingId();
                 const finalData = {
                   ...parcelData,
+                  freshTrackingId,
                   deliveryCost,
                   creation_date: new Date().toISOString(),
                 };
@@ -820,7 +823,7 @@ const SendParcel = () => {
                         `${parcelData.title} is added to ${user.email}'s parcel list`
                       );
                       await trackParcel({
-                        trackingId: res.data.trackingId,
+                        trackingId: freshTrackingId,
                         parcelId: res.data._id,
                         status: "parcel created",
                         message: "Parcel Placed",

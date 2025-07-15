@@ -5,7 +5,7 @@ import AxiosSecure from "./AxiosSecure";
 
 // import AxiosSecure from "./AxiosSecure";
 
-const TrackParcel = async ({ trackingId, parcelId, status, message }) => {
+const trackParcel = async ({ trackingId, parcelId, status, message }) => {
   const axiosSecure = AxiosSecure();
 
   try {
@@ -21,4 +21,4 @@ const TrackParcel = async ({ trackingId, parcelId, status, message }) => {
   }
 };
 
-export default TrackParcel;
+export default trackParcel;
